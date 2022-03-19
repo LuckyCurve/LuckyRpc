@@ -1,3 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 lucky-rpc.iml
+netty-core/netty-core.iml
+netty-core/src/main/resources/
+netty-core/src/test/
+netty-core/target/
