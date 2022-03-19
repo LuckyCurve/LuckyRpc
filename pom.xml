@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>lucky-rpc-core</module>
+        <module>lucky-rpc-server</module>
     </modules>
 
     <groupId>cn.luckycurve</groupId>
