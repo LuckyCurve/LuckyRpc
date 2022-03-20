@@ -6,6 +6,115 @@ RPC Framework implement by Netty and Spring.
 
 
 
+## Usage
+
+>  if you familiar with Netty and Spring, can see modules lucky-rpc-test-* directly
+
+this project dependency Spring IoC, all setup operation both use hook register to IoC.
+
+### Server part:
+
+maven dependency
+
+```xml
+<dependencies>
+   <dependency>
+        <groupId>cn.luckycurve</groupId>
+        <artifactId>lucky-rpc-server</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
+
+if you server not dependency on springboot
+
+```java
+@RpcServerApplication
+public class LuckyRpcTestServerApplication {
+
+    public static void main(String[] args) {
+        new AnnotationConfigApplicationContext(LuckyRpcTestServerApplication.class);
+    }
+}
+```
+
+Otherwise,if your server dependency on springboot, using below code to start up directly
+
+```java
+@SpringBootApplication
+@RpcServerApplication
+public class LuckyRpcTestServerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(LuckyRpcTestServerApplication.class, args);
+    }
+}
+```
+
+using this way to publish server
+
+```java
+@RpcService(value = TimeService.class)
+public class TimeServiceImpl implements TimeService {
+    @Override
+    public String now() {
+        return DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now());
+    }
+}
+```
+
+<hr>
+
+### Client part
+
+maven dependency
+
+```xml
+<dependencies>
+   <dependency>
+        <groupId>cn.luckycurve</groupId>
+        <artifactId>lucky-rpc-client</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
+
+if you server not dependency on springboot
+
+```java
+@RpcServerApplication
+public class LuckyRpcTestClientApplication {
+
+    public static void main(String[] args) {
+        new AnnotationConfigApplicationContext(LuckyRpcTestClientApplication.class);
+    }
+}
+```
+
+Otherwise,if your server dependency on springboot, using below code to start up directly
+
+```java
+@SpringBootApplication
+@RpcClientApplication
+public class LuckyRpcTestClientApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(LuckyRpcTestClientApplication.class, args);
+    }
+}
+```
+
+using this way to consume server
+
+```java
+@RpcAutowired
+TimeService timeService;
+```
+
+
+
+
+
 modules description:
 
 * lucky-rpc-core: provide basic operation for LuckyRpc such as transport data format in package `cn.luckycurve.common`, load balance strategy to finish in `cn.luckycurve.common`, `cn.luckycurve.zookeeper` & `cn.luckycurve.protocol` to upload computer info to register center etc.
@@ -15,7 +124,7 @@ modules description:
 
 
 
-## Note:
+## Note
 
 
 
@@ -55,7 +164,6 @@ Message:
 - MessageHeader
 
 ```
-  						MessageHeader
   +-------------------+------------------+------------------+
   |      version      |      opCode      |     streamId     |
   +-------------------+------------------+------------------+
