@@ -2,7 +2,6 @@ package cn.luckycurve.config;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.Properties;
 
@@ -15,7 +14,7 @@ public class ZookeeperConfig {
         final Properties properties = new Properties();
         try {
             properties.load(ZookeeperConfig.class.getClassLoader().getResourceAsStream("rpc.properties"));
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.info("load rpc config failed! using default properties");
             e.printStackTrace();
         }

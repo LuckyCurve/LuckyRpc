@@ -19,5 +19,5 @@ public @interface RpcAutowired {
     /**
      * 注册的版本号
      */
-    String version();
+    String version() default "";
 }

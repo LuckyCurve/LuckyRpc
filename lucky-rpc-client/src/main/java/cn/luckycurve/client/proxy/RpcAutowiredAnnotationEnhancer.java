@@ -33,9 +33,12 @@ public class RpcAutowiredAnnotationEnhancer {
     @Resource
     ResponseDispatchCenter center;
 
-    public void annotationHandler(Channel channel) throws ClassNotFoundException, IllegalAccessException {
+    public void annotationHandler(Channel channel) throws IllegalAccessException {
         final String[] names = context.getBeanDefinitionNames();
         for (String name : names) {
+            if ("clientApplication".equals(name)) {
+                continue;
+            }
             final Object bean = context.getBean(name);
             for (Field field : bean.getClass().getDeclaredFields()) {
                 final RpcAutowired annotation = field.getAnnotation(RpcAutowired.class);
