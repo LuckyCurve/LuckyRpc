@@ -9,7 +9,9 @@ RPC Framework implement by Netty and Spring.
 modules description:
 
 * lucky-rpc-core: provide basic operation for LuckyRpc such as transport data format in package `cn.luckycurve.common`, load balance strategy to finish in `cn.luckycurve.common`, `cn.luckycurve.zookeeper` & `cn.luckycurve.protocol` to upload computer info to register center etc.
-* lucky-rpc-server: 
+* lucky-rpc-server: finish server start up and synchronized with Spring IoC setup, main Class is `cn.luckycurve.server`, in this class finish ChannelPipeline construct and health info upload, provide some feature like auth protect(`cn.luckycurve.server.handler.AuthServerHandler`), idle check(`cn.luckycurve.server.handler.ServerIdleCheckHandler`) and put class annotated `@RpcService` info to registry center to wait consume.
+* lucky-rpc-client: finish client start up and synchronized with Spring IoC setup, when IoC setup, enhance the field which annotated by `@RpcAutowired`, get server provider info from register center and when we call this field method, it actually call remote process and return result.
+* lucky-rpc-test-*: best practices for using LuckyRpc
 
 
 
@@ -39,3 +41,27 @@ options:
 |                                   |                                              |                      |
 
 > heartTime means that in TCP transport protocol achieve Tcp connection keepalive to reduce the cost for establish and release. Server endpoint do check when pass 3 * heartTime, Client enpoint to keep this connection will send Empty Request when pass heartTime
+
+
+
+
+
+### Transport Data Structure
+
+
+
+Message:
+
+- MessageHeader
+
+```
+  						MessageHeader
+  +-------------------+------------------+------------------+
+  |      version      |      opCode      |     streamId     |
+  +-------------------+------------------+------------------+
+  |                   |                  |                  |
+  0        <=         4         <=       8         <=       16
+```
+
+* MessageBody（many implements, it depend on opcode, through opcode to create MessageBody Implements），can see class `cn.luckycurve.common.OperationType` to get correspondence from opCode to RequestBody and ResponseBody
+
