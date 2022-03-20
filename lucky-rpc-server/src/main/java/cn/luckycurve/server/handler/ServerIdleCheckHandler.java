@@ -1,5 +1,6 @@
 package cn.luckycurve.server.handler;
 
+import cn.luckycurve.config.IdleCheckConfig;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
@@ -11,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ServerIdleCheckHandler extends IdleStateHandler {
     public ServerIdleCheckHandler() {
-        super(10, 0, 0);
+        super(3 * IdleCheckConfig.HEART_TIME, 0, 0);
     }
 
     @Override

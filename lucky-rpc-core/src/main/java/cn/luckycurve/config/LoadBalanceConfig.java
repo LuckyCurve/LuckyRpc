@@ -2,7 +2,6 @@ package cn.luckycurve.config;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.util.Properties;
 
 /**
@@ -15,7 +14,7 @@ public class LoadBalanceConfig {
         final Properties properties = new Properties();
         try {
             properties.load(LoadBalanceConfig.class.getClassLoader().getResourceAsStream("rpc.properties"));
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.info("load rpc config failed! using default properties");
             e.printStackTrace();
         }

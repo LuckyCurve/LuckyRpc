@@ -28,7 +28,7 @@ public class ZookeeperConfig {
 
         ZK_REGISTRY_PATH = properties.getProperty(ZookeeperConfigProperties.ZK_REGISTRY_PATH, "/registry");
         ZK_DATA_PATH = properties.getProperty(ZookeeperConfigProperties.ZK_REGISTRY_PATH, "/registry") + properties.getProperty(ZookeeperConfigProperties.ZK_DATA_PATH, "/data");
-        ZK_NAMESPACE = properties.getProperty(ZookeeperConfigProperties.ZK_NAMESPACE, "netty-rpc");
+        ZK_NAMESPACE = properties.getProperty(ZookeeperConfigProperties.ZK_NAMESPACE, "lucky-rpc");
     }
 
 
