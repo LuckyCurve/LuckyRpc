@@ -43,7 +43,10 @@ public class Server {
 
     ZKClient zkClient = ZKClient.getInstance();
 
-    final NioEventLoopGroup boss = new NioEventLoopGroup();
+    /**
+     * 实际上Server端只会绑定到Boss Group当中的一个去，因此可以直接设置参数为1
+     */
+    final NioEventLoopGroup boss = new NioEventLoopGroup(1);
     final NioEventLoopGroup worker = new NioEventLoopGroup();
 
     /**
