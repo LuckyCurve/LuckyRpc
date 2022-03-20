@@ -5,3 +5,17 @@ netty-core/netty-core.iml
 netty-core/src/main/resources/
 netty-core/src/test/
 netty-core/target/
+lucky-rpc-client/src/main/resources/
+lucky-rpc-client/src/test/
+lucky-rpc-client/target/generated-sources/
+lucky-rpc-core/src/main/resources/
+lucky-rpc-core/src/test/
+lucky-rpc-core/target/generated-sources/
+lucky-rpc-server/src/main/resources/
+lucky-rpc-server/src/test/
+lucky-rpc-server/target/generated-sources/
+lucky-rpc-test-client/src/main/resources/static/
+lucky-rpc-test-client/src/main/resources/templates/
+lucky-rpc-test-facade/src/main/resources/
+lucky-rpc-test-facade/src/test/
+lucky-rpc-test-facade/target/generated-sources/
