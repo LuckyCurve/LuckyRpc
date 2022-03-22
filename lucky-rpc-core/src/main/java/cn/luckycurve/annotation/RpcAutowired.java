@@ -15,6 +15,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Component
+// fixme: 在SpringBootTest当中入法注入对象
 public @interface RpcAutowired {
     /**
      * 注册的版本号

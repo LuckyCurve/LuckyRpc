@@ -20,6 +20,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.util.concurrent.DefaultThreadFactory;
+import io.netty.util.concurrent.UnorderedThreadPoolEventExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -50,6 +52,11 @@ public class Server {
     final NioEventLoopGroup worker = new NioEventLoopGroup();
 
     /**
+     * todo: 压力测试，性能较之于不用的提升
+     */
+    final UnorderedThreadPoolEventExecutor businessExecutor = new UnorderedThreadPoolEventExecutor(16, new DefaultThreadFactory("businessExecutor"));
+
+    /**
      * 新建线程以异步方式启动Server，线程无法重用，无需使用线程池
      */
     public void start() {
@@ -73,10 +80,10 @@ public class Server {
                                         .addLast(new RpcProtocolDecoder())
                                         .addLast(new RpcProtocolEncoder())
 
-                                        .addLast(new ComputerStatusHandler())
-                                        .addLast(new AuthServerHandler())
-                                        .addLast(new ServerKeepaliveHandler())
-                                        .addLast(new ServerInvocationHandler(context));
+                                        .addLast(businessExecutor, new ComputerStatusHandler())
+                                        .addLast(businessExecutor, new AuthServerHandler())
+                                        .addLast(businessExecutor, new ServerKeepaliveHandler())
+                                        .addLast(businessExecutor, new ServerInvocationHandler(context));
                             }
                         });
 
