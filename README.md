@@ -4,7 +4,9 @@
 
 
 
-LuckyRpc is a high-performance, Java-based open-source RPC framework implement by Netty and Spring
+LuckyRpc is a high-performance, Java-based open-source RPC framework implement by Netty, Zookeeper and Spring.
+
+it's low degree of encapsulation and easy to learn, you can through this project to see how rpc work.
 
 
 
