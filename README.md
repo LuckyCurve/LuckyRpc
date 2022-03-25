@@ -9,10 +9,9 @@ LuckyRpc is a high-performance, Java-based open-source RPC framework implement b
 it's low degree of encapsulation and easy to learn, you can through this project to see how rpc work.
 
 
-
 ## Architecture
 
-![架构](https://gitee.com/LuckyCurve/img/raw/93c3e32e4b80591ea976e6345e0cf44f99113092/img/架构.png)
+![架构](source/架构图.png)
 
 
 
